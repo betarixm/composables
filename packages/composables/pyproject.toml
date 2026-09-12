@@ -1,0 +1,36 @@
+[project]
+name = "composables"
+version = "0.1.0"
+description = "Composable primitives for Python."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Minjae Gwon", email = "betarixm@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = []
+keywords = ["composable", "primitives"]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://github.com/betarixm/composables"
+Repository = "https://github.com/betarixm/composables"
+Issues = "https://github.com/betarixm/composables/issues"
+Changelog = "https://github.com/betarixm/composables/releases"
+
+[build-system]
+requires = ["uv_build>=0.12.8,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-root = ""

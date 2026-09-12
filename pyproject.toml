@@ -1,0 +1,45 @@
+[project]
+name = "composables-workspace"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.uv]
+package = false
+required-version = "==0.12.8"
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[tool.uv.sources]
+composables = { workspace = true }
+
+[tool.ruff]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.ruff.format]
+exclude = ["*.md"]
+
+[tool.pyright]
+include = ["packages", "tests"]
+venvPath = "."
+venv = ".venv"
+pythonVersion = "3.12"
+useLibraryCodeForTypes = true
+typeCheckingMode = "strict"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--import-mode=importlib --strict-config --strict-markers"
+
+[dependency-groups]
+dev = [
+    "composables",
+    "pyright>=1.1.414",
+    "pytest>=9.1.1",
+    "ruff>=0.16.7",
+    "twine>=7.0.0",
+]
