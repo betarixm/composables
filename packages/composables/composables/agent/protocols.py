@@ -11,6 +11,10 @@ class Agent[State, Action](ABC):
     """
 
     @abstractmethod
-    async def interact(self, observation: State) -> AsyncGenerator[Action, State]:
-        """Yield actions and receive updated observations through ``asend``."""
+    def interact(self, observation: State) -> AsyncGenerator[Action, State]:
+        """Return an action generator that receives observations through ``asend``.
+
+        Implementations may use ``async def`` with ``yield``. Callers receive
+        the generator directly without awaiting this method.
+        """
         ...

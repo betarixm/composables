@@ -11,6 +11,9 @@ class Policy[State, Action](ABC):
     """
 
     @abstractmethod
-    async def run(self, observation: State) -> AsyncIterator[Action]:
-        """Stream actions from the initial observation."""
+    def run(self, observation: State) -> AsyncIterator[Action]:
+        """Return an action stream to consume directly with ``async for``.
+
+        Implementations may use ``async def`` with ``yield``.
+        """
         ...
