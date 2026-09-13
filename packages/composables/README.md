@@ -61,13 +61,22 @@ and actions; concurrent runs on the same policy must remain independent.
 an action changes, what it earns, and what comes back with the result.
 
 ```text
-session() → EnvironmentSession[State, Action, Reward, Context]
+await session() → EnvironmentSession[State, Action, Reward, Context]
+await __aenter__() → State
 await step(action: Action) → tuple[State, Reward, Terminated, Truncated, Context]
 ```
 
-The environment is stateless. Each session owns its interaction state and
-uses `async with` to scope resource acquisition and cleanup. Await each
-`session.step(action)` call to obtain its transition result.
+The environment is stateless. Await `environment.session()` to create a session.
+Each session owns its interaction state and uses `async with` to scope resource
+acquisition and cleanup through its asynchronous `__aenter__` and `__aexit__`
+methods. Entering a session returns its initial state. Keep the session object
+to call `session.step(action)` and await its transition result.
+
+```python
+session = await environment.session()
+async with session as initial_state:
+    transition = await session.step(action)
+```
 
 Two distinct boolean types give episode endings their own meaning:
 

@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 from types import TracebackType
-from typing import Self
 
 from .types import Terminated, Truncated
 
@@ -16,8 +15,8 @@ class EnvironmentSession[State, Action, Reward, Context](ABC):
         ...
 
     @abstractmethod
-    async def __aenter__(self) -> Self:
-        """Acquire session resources and return the active session."""
+    async def __aenter__(self) -> State:
+        """Acquire session resources and return the initial state."""
         ...
 
     @abstractmethod
@@ -35,6 +34,9 @@ class Environment[State, Action, Reward, Context](ABC):
     """Stateless factory for independent environment sessions."""
 
     @abstractmethod
-    def session(self) -> EnvironmentSession[State, Action, Reward, Context]:
-        """Create a session to be entered with ``async with``."""
+    async def session(self) -> EnvironmentSession[State, Action, Reward, Context]:
+        """Asynchronously create a session to be entered with ``async with``.
+
+        Use ``async with await environment.session() as initial_state:``.
+        """
         ...
