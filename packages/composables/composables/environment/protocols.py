@@ -9,7 +9,7 @@ class EnvironmentSession[State, Action, Reward, Context](ABC):
     """Stateful interaction with session resources scoped to ``async with``."""
 
     @abstractmethod
-    def step(
+    async def step(
         self, action: Action
     ) -> tuple[State, Reward, Terminated, Truncated, Context]:
         """Apply an action and return the next state, reward, end flags, and context."""

@@ -62,11 +62,12 @@ an action changes, what it earns, and what comes back with the result.
 
 ```text
 session() → EnvironmentSession[State, Action, Reward, Context]
-step(action: Action) → tuple[State, Reward, Terminated, Truncated, Context]
+await step(action: Action) → tuple[State, Reward, Terminated, Truncated, Context]
 ```
 
 The environment is stateless. Each session owns its interaction state and
-uses `async with` to scope resource acquisition and cleanup.
+uses `async with` to scope resource acquisition and cleanup. Await each
+`session.step(action)` call to obtain its transition result.
 
 Two distinct boolean types give episode endings their own meaning:
 
